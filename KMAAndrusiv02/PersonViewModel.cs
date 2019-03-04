@@ -53,7 +53,7 @@ namespace KMAAndrusiv02
             LoaderManager.Instance.ShowLoader();
             await Task.Run(() =>
             {
-                Thread.Sleep(1000);
+                PersonManagerInstance.PersonInstance.Calculate();
             });
             LoaderManager.Instance.HideLoader();
 

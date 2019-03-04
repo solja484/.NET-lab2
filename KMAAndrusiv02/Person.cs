@@ -7,9 +7,23 @@ namespace KMAAndrusiv02
     class Person
     {
         #region Fields
+        private bool _calculated = false;
         private string _name = "", _surname = "", _mail = "";
+        private string _chinese, _sun;
+        private int _age;
+        private bool _isAdult;
         private DateTime _birthday = DateTime.MinValue;
         #endregion
+
+        public void Calculate()
+        {
+            _calculated = true;
+            _sun = getSunSign(_birthday);
+            _chinese = getChineseSign(_birthday.Year);
+            if (Age < 18)
+                _isAdult = false;
+            else _isAdult = true;
+        }
 
         #region Constructors
         public Person(string name, string surname, string Email, DateTime Date)
@@ -40,6 +54,7 @@ namespace KMAAndrusiv02
             get { return _name; }
             set
             {
+                _calculated = false;
                 _name = value;
             }
         }
@@ -48,6 +63,7 @@ namespace KMAAndrusiv02
             get { return _surname; }
             set
             {
+                _calculated = false;
                 _surname = value;
             }
         }
@@ -66,6 +82,7 @@ namespace KMAAndrusiv02
             get { return _birthday; }
             set
             {
+                _calculated = false;
                 _birthday = value;
             }
         }
@@ -75,14 +92,19 @@ namespace KMAAndrusiv02
         #region Read only properties
         public int Age
         {
-            get { return GetAge(Birthday); }
+            get
+            {
+                if (_calculated)
+                    Calculate();
+                return _age;
+            }
         }
 
         public bool IsAdult
         {
             get
             {
-                if (GetAge(Birthday) >= 18)
+                if (_isAdult)
                     return true;
                 return false;
             }
@@ -100,11 +122,21 @@ namespace KMAAndrusiv02
 
         public string SunSign
         {
-            get { return getSunSign(Birthday); }
+            get
+            {
+                if (!_calculated)
+                    Calculate();
+                return _sun;
+            }
         }
         public string ChineseSign
         {
-            get { return getChineseSign(Birthday.Year); }
+            get
+            {
+                if (!_calculated)
+                    Calculate();
+                return _chinese;
+            }
         }
 
         #endregion
@@ -154,7 +186,7 @@ namespace KMAAndrusiv02
         private static int GetAge(DateTime bday)
         {
             int age = DateTime.Today.Year - bday.Year;
-            if (age == 0) return 0;
+            if (age == 0) return age;
             if (DateTime.Today.Month < bday.Month || DateTime.Today.Day < bday.Day)
                 age--;
 
