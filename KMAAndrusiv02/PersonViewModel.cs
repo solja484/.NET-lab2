@@ -53,12 +53,12 @@ namespace KMAAndrusiv02
             LoaderManager.Instance.ShowLoader();
             await Task.Run(() =>
             {
-                
+               PersonManagerInstance.PersonInstance.Calculate();  
             });
             LoaderManager.Instance.HideLoader();
 
          
-            PersonManagerInstance.PersonInstance.Calculate();
+           
             if (PersonManagerInstance.PersonInstance.Age < 0 || PersonManagerInstance.PersonInstance.Age > 135)
             {
                 MessageBox.Show("You enter wrong date!" + PersonManagerInstance.PersonInstance.Age);

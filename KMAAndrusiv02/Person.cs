@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace KMAAndrusiv02
 {
-    class Person
+    class Person : INotifyPropertyChanged
     {
         #region Fields
         private bool _calculated = false;
@@ -21,6 +23,11 @@ namespace KMAAndrusiv02
             if (Age < 18)
                 _isAdult = false;
             else _isAdult = true;
+
+            OnPropertyChanged("ChineseSign");
+            OnPropertyChanged("SunSign");
+            OnPropertyChanged("IsBirthgday");
+            OnPropertyChanged("IsAdult");
         }
 
         #region Constructors
@@ -201,7 +208,14 @@ namespace KMAAndrusiv02
         }
 
         #endregion
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion#region INotifyPropertyChanged
 
     }
 }
