@@ -1,6 +1,5 @@
-﻿
-
-using System;
+﻿using System;
+using System.Windows;
 
 namespace KMAAndrusiv02
 {
@@ -10,7 +9,6 @@ namespace KMAAndrusiv02
         private bool _calculated = false;
         private string _name = "", _surname = "", _mail = "";
         private string _chinese, _sun;
-        private int _age;
         private bool _isAdult;
         private DateTime _birthday = DateTime.MinValue;
         #endregion
@@ -32,12 +30,14 @@ namespace KMAAndrusiv02
             _surname = surname;
             _mail = Email;
             _birthday = Date;
+            _calculated = false;
         }
         public Person(string name, string surname, string Email)
         {
             _name = name;
             _surname = surname;
             _mail = Email;
+            _calculated = false;
         }
 
         public Person(string name, string surname, DateTime Date)
@@ -45,6 +45,7 @@ namespace KMAAndrusiv02
             _name = name;
             _surname = surname;
             _birthday = Date;
+            _calculated = false;
         }
         #endregion
         #region Properties
@@ -84,6 +85,7 @@ namespace KMAAndrusiv02
             {
                 _calculated = false;
                 _birthday = value;
+      
             }
         }
         #endregion
@@ -94,9 +96,9 @@ namespace KMAAndrusiv02
         {
             get
             {
-                if (_calculated)
+                if (!_calculated)
                     Calculate();
-                return _age;
+                return GetAge(_birthday);
             }
         }
 
@@ -104,6 +106,8 @@ namespace KMAAndrusiv02
         {
             get
             {
+                if (!_calculated)
+                    Calculate();
                 if (_isAdult)
                     return true;
                 return false;
@@ -114,6 +118,8 @@ namespace KMAAndrusiv02
         {
             get
             {
+                if (!_calculated)
+                    Calculate();
                 if (Birthday.Day == DateTime.Today.Day && Birthday.Month == DateTime.Today.Month)
                     return true;
                 return false;
@@ -186,6 +192,7 @@ namespace KMAAndrusiv02
         private static int GetAge(DateTime bday)
         {
             int age = DateTime.Today.Year - bday.Year;
+          
             if (age == 0) return age;
             if (DateTime.Today.Month < bday.Month || DateTime.Today.Day < bday.Day)
                 age--;
