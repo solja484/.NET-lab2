@@ -37,7 +37,7 @@
         <TextBox Grid.Row="3"  Grid.Column="1"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"  Text="{Binding PersonManagerInstance.PersonInstance.ChineseSign, Mode=OneWay}"></TextBox>
         <Label Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" FontFamily="HelveticaNeue" Content="Is B-day:"></Label>
         <TextBox Grid.Row="3"  Grid.Column="3"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"   Text="{Binding PersonManagerInstance.PersonInstance.IsBirthday, Mode=OneWay}"></TextBox>
-        <Button Grid.Row="4" Grid.ColumnSpan="4" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="30" FontFamily="HelveticaNeue" Content="Back" Command="{Binding ReturnCommand }"></Button>
+        <Button Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="0" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="30" FontFamily="HelveticaNeue" Content="Back" Command="{Binding ReturnCommand }"></Button>
 
     </Grid>
 </UserControl>

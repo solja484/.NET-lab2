@@ -3,25 +3,17 @@ using System;
 
 namespace KMAAndrusiv02
 {
-    class ResultsViewModel : BaseViewModel
+    internal class ResultsViewModel : BaseViewModel
     {
-        private PersonManager _personManagerInstance = PersonManager.Instance;
+        private RelayCommand<object> _returnCommand;
 
-        RelayCommand<object> _returnCommand;
+        public PersonManager PersonManagerInstance { get; } = PersonManager.Instance;
 
-        public PersonManager PersonManagerInstance
+        public RelayCommand<object> ReturnCommand
         {
             get
             {
-                return _personManagerInstance;
-            }
-        }
-
-        public RelayCommand<Object> ReturnCommand
-        {
-            get
-            {
-                return _returnCommand ?? (_returnCommand = new RelayCommand<Object>(
+                return _returnCommand ?? (_returnCommand = new RelayCommand<object>(
                     o => { NavigationManager.Instance.Navigate(ViewType.Input); }));
             }
         }

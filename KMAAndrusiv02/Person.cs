@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 
 namespace KMAAndrusiv02
 {
-    class Person : INotifyPropertyChanged
+    internal class Person : INotifyPropertyChanged
     {
         #region Fields
         private bool _calculated = false;
-        private string _name = "", _surname = "", _mail = "";
+        private string _name, _surname , _mail = "";
         private string _chinese, _sun;
         private bool _isAdult;
         private DateTime _birthday = DateTime.MinValue;
@@ -18,81 +17,84 @@ namespace KMAAndrusiv02
         public void Calculate()
         {
             _calculated = true;
-            _sun = getSunSign(_birthday);
-            _chinese = getChineseSign(_birthday.Year);
-            if (Age < 18)
-                _isAdult = false;
-            else _isAdult = true;
+            _sun = GetSunSign(_birthday);
+            _chinese = GetChineseSign(_birthday.Year);
+            _isAdult = Age >= 18;
 
-            OnPropertyChanged("ChineseSign");
-            OnPropertyChanged("SunSign");
-            OnPropertyChanged("IsBirthgday");
-            OnPropertyChanged("IsAdult");
+            OnPropertyChanged($"ChineseSign");
+            OnPropertyChanged($"SunSign");
+            OnPropertyChanged($"IsBirthday");
+            OnPropertyChanged($"IsAdult");
         }
 
         #region Constructors
-        public Person(string name, string surname, string Email, DateTime Date)
+        public Person(string name, string surname, string email, DateTime date)
         {
             _name = name;
             _surname = surname;
-            _mail = Email;
-            _birthday = Date;
+            _mail = email;
+            _birthday = date;
             _calculated = false;
         }
-        public Person(string name, string surname, string Email)
+        public Person(string name, string surname, string email)
         {
             _name = name;
             _surname = surname;
-            _mail = Email;
+            _mail = email;
             _calculated = false;
         }
 
-        public Person(string name, string surname, DateTime Date)
+        public Person(string name, string surname, DateTime date)
         {
             _name = name;
             _surname = surname;
-            _birthday = Date;
+            _birthday = date;
             _calculated = false;
         }
         #endregion
         #region Properties
 
-        public String Name
+        public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 _calculated = false;
                 _name = value;
+                OnPropertyChanged();
+
             }
         }
-        public String Surname
+        public string Surname
         {
-            get { return _surname; }
+            get => _surname;
             set
             {
                 _calculated = false;
                 _surname = value;
+                OnPropertyChanged();
             }
         }
 
-        public String Mail
+        public string Mail
         {
-            get { return _mail; }
+            get => _mail;
             set
             {
                 _mail = value;
+                OnPropertyChanged();
             }
         }
 
         public DateTime Birthday
         {
-            get { return _birthday; }
+            get => _birthday;
             set
             {
                 _calculated = false;
                 _birthday = value;
-      
+                OnPropertyChanged();
+
             }
         }
         #endregion
@@ -115,9 +117,7 @@ namespace KMAAndrusiv02
             {
                 if (!_calculated)
                     Calculate();
-                if (_isAdult)
-                    return true;
-                return false;
+                return _isAdult;
             }
         }
 
@@ -127,9 +127,7 @@ namespace KMAAndrusiv02
             {
                 if (!_calculated)
                     Calculate();
-                if (Birthday.Day == DateTime.Today.Day && Birthday.Month == DateTime.Today.Month)
-                    return true;
-                return false;
+                return Birthday.Day == DateTime.Today.Day && Birthday.Month == DateTime.Today.Month;
             }
         }
 
@@ -155,27 +153,55 @@ namespace KMAAndrusiv02
         #endregion
 
         #region Private methods
-        private static string getSunSign(DateTime bday)
+        private static string GetSunSign(DateTime bday)
         {
-            int month = bday.Month;
-            int day = bday.Day;
-            if ((month == 1 && day < 20) || (month == 12 && day > 21)) return "Capricorn";
-            if ((month == 1 && day > 19) || (month == 2 && day < 19)) return "Aquarius";
-            if ((month == 2 && day > 18) || (month == 3 && day < 21)) return "Pisces";
-            if ((month == 3 && day > 20) || (month == 4 && day < 20)) return "Aries";
-            if ((month == 4 && day > 19) || (month == 5 && day < 21)) return "Taurus";
-            if ((month == 5 && day > 20) || (month == 6 && day < 21)) return "Gemini";
-            if ((month == 6 && day > 20) || (month == 7 && day < 23)) return "Cancer";
-            if ((month == 7 && day > 22) || (month == 8 && day < 23)) return "Leo";
-            if ((month == 8 && day > 22) || (month == 9 && day < 23)) return "Virgo";
-            if ((month == 9 && day > 22) || (month == 10 && day < 23)) return "Libra";
-            if ((month == 10 && day > 22) || (month == 11 && day < 22)) return "Scorpio";
-            if ((month == 11 && day > 21) || (month == 12 && day < 22)) return "Sagittarius";
-            return "Capricorn";
+            var month = bday.Month;
+            var day = bday.Day;
+            switch (month)
+            {
+                case 1 when day < 20:
+                case 12 when day > 21:
+                    return "Capricorn";
+                case 1 when day > 19:
+                case 2 when day < 19:
+                    return "Aquarius";
+                case 2 when day > 18:
+                case 3 when day < 21:
+                    return "Pisces";
+                case 3 when day > 20:
+                case 4 when day < 20:
+                    return "Aries";
+                case 4 when day > 19:
+                case 5 when day < 21:
+                    return "Taurus";
+                case 5 when day > 20:
+                case 6 when day < 21:
+                    return "Gemini";
+                case 6 when day > 20:
+                case 7 when day < 23:
+                    return "Cancer";
+                case 7 when day > 22:
+                case 8 when day < 23:
+                    return "Leo";
+                case 8 when day > 22:
+                case 9 when day < 23:
+                    return "Virgo";
+                case 9 when day > 22:
+                case 10 when day < 23:
+                    return "Libra";
+                case 10 when day > 22:
+                case 11 when day < 22:
+                    return "Scorpio";
+                case 11 when day > 21:
+                case 12 when day < 22:
+                    return "Sagittarius";
+                default:
+                    return "Capricorn";
+            }
         }
 
 
-        private static string getChineseSign(int year)
+        private static string GetChineseSign(int year)
         {
 
             switch (year % 12)
@@ -198,7 +224,7 @@ namespace KMAAndrusiv02
 
         private static int GetAge(DateTime bday)
         {
-            int age = DateTime.Today.Year - bday.Year;
+            var age = DateTime.Today.Year - bday.Year;
           
             if (age == 0) return age;
             if (DateTime.Today.Month < bday.Month || DateTime.Today.Day < bday.Day)

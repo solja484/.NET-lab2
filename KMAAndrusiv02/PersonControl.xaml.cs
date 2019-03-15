@@ -3,6 +3,9 @@ using System.Windows.Controls;
 
 namespace KMAAndrusiv02
 {
+    /// <inheritdoc>
+    ///     <cref></cref>
+    /// </inheritdoc>
     /// <summary>
     /// Interaction logic for AuthorizeControl.xaml
     /// </summary>

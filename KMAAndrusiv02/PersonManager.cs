@@ -3,7 +3,7 @@
 namespace KMAAndrusiv02
 {
     // Singleton
-    class PersonManager
+    internal class PersonManager
     {
         private static readonly object Locker = new object();
         private static PersonManager _instance;
@@ -21,15 +21,7 @@ namespace KMAAndrusiv02
             }
         }
 
-        private Person _personInstance = new Person("", "", "", DateTime.MinValue);
-
-        public Person PersonInstance
-        {
-            get
-            {
-                return _personInstance;
-            }
-        }
+        public Person PersonInstance { get; } = new Person("", "", "", DateTime.MinValue);
 
         private PersonManager()
         {

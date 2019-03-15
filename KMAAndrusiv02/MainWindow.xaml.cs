@@ -4,15 +4,15 @@ using KMAAndrusiv02.NavigationTools;
 
 namespace KMAAndrusiv02
 {
+    /// <inheritdoc>
+    ///     <cref></cref>
+    /// </inheritdoc>
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, IContentOwner
     {
-        public ContentControl ContentControl
-        {
-            get { return _contentControl; }
-        }
+        public ContentControl ContentControl => _contentControl;
 
         public MainWindow()
         {

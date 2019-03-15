@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AgeTooBigException.cs" />
+    <Compile Include="AgeTooSmallException.cs" />
+    <Compile Include="InvalidEmailException.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ResultsControl.xaml.cs">
       <DependentUpon>ResultsControl.xaml</DependentUpon>

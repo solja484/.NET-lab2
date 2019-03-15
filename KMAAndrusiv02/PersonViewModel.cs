@@ -1,6 +1,6 @@
 ﻿using KMAAndrusiv02.NavigationTools;
 using System;
-using System.Threading;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -12,30 +12,23 @@ namespace KMAAndrusiv02
 
         #region Fields
 
-        private Person _modelPerson = new Person("", "", "", DateTime.Today);
+        private readonly Person _modelPerson = new Person("", "", "", DateTime.Today);
+        private readonly Regex _mailRegex = new Regex(@"^[\w\.\d]+\@[\w\d]+\.[\w\d]{2,}$");
 
         #endregion
 
 
         #region Commands
 
-        RelayCommand<object> _calculateCommand;
+        private RelayCommand<object> _calculateCommand;
 
         #endregion
 
         #region Properties
 
-        private PersonManager _personManagerInstance = PersonManager.Instance;
+        public PersonManager PersonManagerInstance { get; } = PersonManager.Instance;
 
-        public PersonManager PersonManagerInstance
-        {
-            get
-            {
-                return _personManagerInstance;
-            }
-        }
-
-        public RelayCommand<Object> CalculateCommand
+        public RelayCommand<object> CalculateCommand
         {
             get
             {
@@ -53,18 +46,28 @@ namespace KMAAndrusiv02
             LoaderManager.Instance.ShowLoader();
             await Task.Run(() =>
             {
-               PersonManagerInstance.PersonInstance.Calculate();  
+                PersonManagerInstance.PersonInstance.Calculate();
             });
             LoaderManager.Instance.HideLoader();
 
-         
-           
-            if (PersonManagerInstance.PersonInstance.Age < 0 || PersonManagerInstance.PersonInstance.Age > 135)
+            try
             {
-                MessageBox.Show("You enter wrong date!" + PersonManagerInstance.PersonInstance.Age);
-                return;
+                if (!_mailRegex.IsMatch(PersonManagerInstance.PersonInstance.Mail))
+                    throw new InvalidEmailException();
+
+                if (PersonManagerInstance.PersonInstance.Birthday > DateTime.Today)
+                    throw new AgeTooSmallException();
+                
+                if(PersonManagerInstance.PersonInstance.Age > 135)
+                    throw new AgeTooBigException();
+
             }
 
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
 
             NavigationManager.Instance.Navigate(ViewType.Results);
 
@@ -73,23 +76,23 @@ namespace KMAAndrusiv02
             {
                 if (PersonManagerInstance.PersonInstance.Age > 0)
                 {
-                    MessageBox.Show("Congradulations! It is your " + PersonManagerInstance.PersonInstance.Age + " birthday today!");
+                    MessageBox.Show("Congratulations! It is your " + PersonManagerInstance.PersonInstance.Age + " birthday today!");
                 }
                 else
                 {
-                    MessageBox.Show("Congradulations to newborn!");
+                    MessageBox.Show("Congratulations to newborn!");
                 }
             }
 
 
         }
-        
+
 
 
         public bool CanExecuteCommand()
         {
-            return !PersonManagerInstance.PersonInstance.Name.Equals(String.Empty) && !PersonManagerInstance.PersonInstance.Mail.Equals(String.Empty)
-                && !PersonManagerInstance.PersonInstance.Surname.Equals(String.Empty) && PersonManagerInstance.PersonInstance.Birthday != DateTime.MinValue;
+            return !PersonManagerInstance.PersonInstance.Name.Equals(string.Empty) && !PersonManagerInstance.PersonInstance.Mail.Equals(string.Empty)
+                && !PersonManagerInstance.PersonInstance.Surname.Equals(string.Empty) && PersonManagerInstance.PersonInstance.Birthday != DateTime.MinValue;
         }
 
 

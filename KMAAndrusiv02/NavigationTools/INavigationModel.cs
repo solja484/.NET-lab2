@@ -7,7 +7,7 @@ namespace KMAAndrusiv02.NavigationTools
         Results
     }
 
-    interface INavigationModel
+    internal interface INavigationModel
     {
         void Navigate(ViewType viewType);
     }

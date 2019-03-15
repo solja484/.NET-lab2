@@ -13,7 +13,7 @@ namespace KMAAndrusiv02
         #region Properties
         public Visibility LoaderVisibility
         {
-            get { return _loaderVisibility; }
+            get => _loaderVisibility;
             set
             {
                 _loaderVisibility = value;
@@ -22,7 +22,7 @@ namespace KMAAndrusiv02
         }
         public bool IsControlEnabled
         {
-            get { return _isControlEnabled; }
+            get => _isControlEnabled;
             set
             {
                 _isControlEnabled = value;
