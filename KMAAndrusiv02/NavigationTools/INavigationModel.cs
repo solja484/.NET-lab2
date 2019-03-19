@@ -4,7 +4,8 @@ namespace KMAAndrusiv02.NavigationTools
     internal enum ViewType
     {
         Input,
-        Results
+        Results,
+        List
     }
 
     internal interface INavigationModel

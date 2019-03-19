@@ -16,5 +16,10 @@ namespace KMAAndrusiv02
             InitializeComponent();
             DataContext = new PersonViewModel();
         }
+
+        public void TriggerPropertyChanged(string s)
+        {
+            ((BaseViewModel) DataContext).OnPropertyChanged(s);
+        }
     }
 }

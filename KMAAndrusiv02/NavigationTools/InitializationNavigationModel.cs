@@ -16,8 +16,9 @@ namespace KMAAndrusiv02.NavigationTools
                 case ViewType.Input:
                     ViewsDictionary.Add(viewType, new PersonControl());
                     break;
-                case ViewType.Results:
-                    ViewsDictionary.Add(viewType, new ResultsControl());
+               
+                case ViewType.List:
+                    ViewsDictionary.Add(viewType, new PersonListView());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(viewType), viewType, null);

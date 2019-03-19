@@ -19,6 +19,9 @@ namespace KMAAndrusiv02.NavigationTools
             if (!ViewsDictionary.ContainsKey(viewType))
                 InitializeView(viewType);
             ContentOwner.ContentControl.Content = ViewsDictionary[viewType];
+
+            if (viewType == ViewType.List)
+                ViewsDictionary[viewType].TriggerPropertyChanged("Persons");
         }
 
         protected abstract void InitializeView(ViewType viewType);

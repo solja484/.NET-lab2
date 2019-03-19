@@ -20,13 +20,31 @@ namespace KMAAndrusiv02
 
         #region Commands
 
-        private RelayCommand<object> _calculateCommand;
+        private RelayCommand<object> _calculateCommand, _backCommand;
 
         #endregion
 
         #region Properties
 
-        public PersonManager PersonManagerInstance { get; } = PersonManager.Instance;
+        private Person _personInstance = new Person("", "", "", DateTime.MinValue);
+
+        public Person PersonInstance
+        {
+            get { return _personInstance; }
+            set
+            {
+                _personInstance = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RelayCommand<object> BackCommand
+        {
+            get
+            {
+                return _backCommand ?? (_backCommand = new RelayCommand<object>((o) => NavigationManager.Instance.Navigate(ViewType.List)));
+            }
+        }
 
         public RelayCommand<object> CalculateCommand
         {
@@ -46,19 +64,19 @@ namespace KMAAndrusiv02
             LoaderManager.Instance.ShowLoader();
             await Task.Run(() =>
             {
-                PersonManagerInstance.PersonInstance.Calculate();
+                PersonInstance.Calculate();
             });
             LoaderManager.Instance.HideLoader();
 
             try
             {
-                if (!_mailRegex.IsMatch(PersonManagerInstance.PersonInstance.Mail))
+                if (!_mailRegex.IsMatch(PersonInstance.Mail))
                     throw new InvalidEmailException();
 
-                if (PersonManagerInstance.PersonInstance.Birthday > DateTime.Today)
+                if (PersonInstance.Birthday > DateTime.Today)
                     throw new AgeTooSmallException();
                 
-                if(PersonManagerInstance.PersonInstance.Age > 135)
+                if(PersonInstance.Age > 135)
                     throw new AgeTooBigException();
 
             }
@@ -69,30 +87,21 @@ namespace KMAAndrusiv02
                 return;
             }
 
-            NavigationManager.Instance.Navigate(ViewType.Results);
 
-            if (PersonManagerInstance.PersonInstance.Birthday.Day.Equals(DateTime.Today.Day) &&
-                PersonManagerInstance.PersonInstance.Birthday.Month.Equals(DateTime.Today.Month))
-            {
-                if (PersonManagerInstance.PersonInstance.Age > 0)
-                {
-                    MessageBox.Show("Congratulations! It is your " + PersonManagerInstance.PersonInstance.Age + " birthday today!");
-                }
-                else
-                {
-                    MessageBox.Show("Congratulations to newborn!");
-                }
-            }
-
-
+            StationManager.DataStorage.AddPerson(PersonInstance);
+            PersonInstance.Name = "";
+            PersonInstance.Surname = "";
+            PersonInstance.Mail = "";
+            PersonInstance.Birthday=DateTime.MinValue;
+            NavigationManager.Instance.Navigate(ViewType.List);
         }
 
 
 
         public bool CanExecuteCommand()
         {
-            return !PersonManagerInstance.PersonInstance.Name.Equals(string.Empty) && !PersonManagerInstance.PersonInstance.Mail.Equals(string.Empty)
-                && !PersonManagerInstance.PersonInstance.Surname.Equals(string.Empty) && PersonManagerInstance.PersonInstance.Birthday != DateTime.MinValue;
+            return !PersonInstance.Name.Equals(string.Empty) && !PersonInstance.Mail.Equals(string.Empty)
+                && !PersonInstance.Surname.Equals(string.Empty) && PersonInstance.Birthday != DateTime.MinValue;
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using KMAAndrusiv02.DataStorageTools;
 using KMAAndrusiv02.NavigationTools;
 
 namespace KMAAndrusiv02
@@ -18,8 +19,9 @@ namespace KMAAndrusiv02
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+            StationManager.Initialize(new SerializedDataStorage());
             NavigationManager.Instance.Initialize(new InitializationNavigationModel(this));
-            NavigationManager.Instance.Navigate(ViewType.Input);
+            NavigationManager.Instance.Navigate(ViewType.List);
         }
     }
 }

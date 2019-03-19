@@ -10,7 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <RowDefinition Height="120"/>
-            <RowDefinition Height="160"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="160"/>
@@ -19,14 +20,15 @@
             <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" Content="Name:"></Label>
-        <TextBox Grid.Row="0"  Grid.Column="1"  Width="250" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" Text="{Binding PersonManagerInstance.PersonInstance.Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="0"  Grid.Column="1"  Width="250" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" Text="{Binding PersonInstance.Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Label Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" FontFamily="HelveticaNeue" Content="Mail:"></Label>
-        <TextBox Grid.Row="0"  Grid.Column="3"  Width="250" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue"  Text="{Binding PersonManagerInstance.PersonInstance.Mail, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="0"  Grid.Column="3"  Width="250" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue"  Text="{Binding PersonInstance.Mail, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" Content="Surname:"></Label>
-        <TextBox Grid.Row="1"  Grid.Column="1"  Width="250" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue"  Text="{Binding PersonManagerInstance.PersonInstance.Surname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="1"  Grid.Column="1"  Width="250" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue"  Text="{Binding PersonInstance.Surname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Label Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" FontFamily="HelveticaNeue" Content="Date:"></Label>
-        <DatePicker Name="Bdate"  Grid.Row="1" Grid.Column="3" Width="245" VerticalAlignment="Center" HorizontalAlignment="Left" IsDropDownOpen="False" SelectedDateFormat="Short"  FontSize="30" FontFamily="HelveticaNeue"  SelectedDate="{Binding PersonManagerInstance.PersonInstance.Birthday, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+        <DatePicker Name="Bdate"  Grid.Row="1" Grid.Column="3" Width="245" VerticalAlignment="Center" HorizontalAlignment="Left" IsDropDownOpen="False" SelectedDateFormat="Short"  FontSize="30" FontFamily="HelveticaNeue"  SelectedDate="{Binding PersonInstance.Birthday, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
         <Button Grid.Row="2" Height="Auto"     Grid.ColumnSpan="4"  VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="30" FontFamily="HelveticaNeueCyr" Content="Proceed" FontWeight="Bold"  Command="{Binding CalculateCommand}"/>
+        <Button Grid.Row="3" Height="Auto"     Grid.ColumnSpan="4"  VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="30" FontFamily="HelveticaNeueCyr" Content="Back" FontWeight="Bold"  Command="{Binding BackCommand}"/>
 
 
     </Grid>

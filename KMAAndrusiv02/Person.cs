@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace KMAAndrusiv02
 {
+    [Serializable]
     internal class Person : INotifyPropertyChanged
     {
         #region Fields
@@ -28,13 +29,9 @@ namespace KMAAndrusiv02
         }
 
         #region Constructors
-        public Person(string name, string surname, string email, DateTime date)
+        public Person(string name, string surname, string email, DateTime date) : this(name, surname, email)
         {
-            _name = name;
-            _surname = surname;
-            _mail = email;
             _birthday = date;
-            _calculated = false;
         }
         public Person(string name, string surname, string email)
         {
@@ -44,12 +41,9 @@ namespace KMAAndrusiv02
             _calculated = false;
         }
 
-        public Person(string name, string surname, DateTime date)
+        public Person(string name, string surname, DateTime date) : this(name, surname, "")
         {
-            _name = name;
-            _surname = surname;
             _birthday = date;
-            _calculated = false;
         }
         #endregion
         #region Properties
@@ -235,6 +229,7 @@ namespace KMAAndrusiv02
 
         #endregion
         #region INotifyPropertyChanged
+        [field: NonSerializedAttribute()]
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
