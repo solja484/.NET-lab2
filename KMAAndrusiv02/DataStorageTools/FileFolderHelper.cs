@@ -13,7 +13,7 @@ namespace KMAAndrusiv02.DataStorageTools
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         internal static readonly string AppFolderPath =
-            Path.Combine(AppDataPath, "CSharpKMA");
+            Path.Combine(AppDataPath, "AndrusivCSharpKMA");
 
         internal static readonly string StorageFilePath =
             Path.Combine(AppFolderPath, "PersonStorage.cskma");

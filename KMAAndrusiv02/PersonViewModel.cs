@@ -12,6 +12,8 @@ namespace KMAAndrusiv02
 
         #region Fields
 
+        private PersonManager _personManager = PersonManager.Instance;
+
         private readonly Person _modelPerson = new Person("", "", "", DateTime.Today);
         private readonly Regex _mailRegex = new Regex(@"^[\w\.\d]+\@[\w\d]+\.[\w\d]{2,}$");
 
@@ -30,7 +32,7 @@ namespace KMAAndrusiv02
 
         public Person PersonInstance
         {
-            get { return _personInstance; }
+            get { return _personManager.PersonInstance; }
             set
             {
                 _personInstance = value;
@@ -88,7 +90,7 @@ namespace KMAAndrusiv02
             }
 
 
-            StationManager.DataStorage.AddPerson(PersonInstance);
+            StationManager.DataStorage.AddPerson(new Person(PersonInstance.Name, PersonInstance.Surname, PersonInstance.Mail, PersonInstance.Birthday));
             PersonInstance.Name = "";
             PersonInstance.Surname = "";
             PersonInstance.Mail = "";

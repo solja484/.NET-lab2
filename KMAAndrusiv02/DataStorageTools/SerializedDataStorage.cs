@@ -54,12 +54,12 @@ namespace KMAAndrusiv02.DataStorageTools
         {
             //1
            AddPerson(new Person("Benedict","Cumberbatch", "enedict@gmail.com", new DateTime(1976,7,19)));
-           AddPerson(new Person("Bumbleclick", "Crumblescotch", "umbleclick@gmail.com", new DateTime(1992, 6, 17)));
-           AddPerson(new Person("Benerobber"," Crackerblow", "enerobber@gmail.com", new DateTime(1988, 5, 1)));
+           AddPerson(new Person("David", "Bumblebryuh",  "umbleclick@gmail.com", new DateTime(1992, 6, 17)));
+           AddPerson(new Person("Benerobber","Crackerblow", "enerobber@gmail.com", new DateTime(1988, 5, 1)));
            AddPerson(new Person("Bankerbuilder", "Clintonclopper", "ankerbuilder@gmail.com", new DateTime(1992, 4, 15)));
            AddPerson(new Person("Bananapeel","Childgibbler", "ananapeel@gmail.com", new DateTime(1901, 3, 13)));
         //2
-           AddPerson(new Person("Brandydick","Cumsabunch ", "randydick@gmail.com", new DateTime(2001, 2, 22)));
+           AddPerson(new Person("Brandydick","Cumsabunch", "randydick@gmail.com", new DateTime(2001, 2, 22)));
            AddPerson(new Person("Benedril","Cumbersnatch", "enedril@gmail.com", new DateTime(1954, 1, 12)));
            AddPerson(new Person("Bumbersnatch","Cuddlebitch", "umbersnatch@gmail.com", new DateTime(2008, 12, 21)));
            AddPerson(new Person("Beneduack","Cucemberbatch", "eneduack@gmail.com", new DateTime(2005, 11, 18)));
@@ -84,7 +84,7 @@ namespace KMAAndrusiv02.DataStorageTools
             AddPerson(new Person("Bumbletumble","Humblecrumble", "umbletumble@gmail.com", new DateTime(1989, 5, 16)));
             //6
             AddPerson(new Person("Bundledip","Cabbagewank", "undledip@gmail.com", new DateTime(1928, 6, 20)));
-            AddPerson(new Person("David","Bumblebryuh", "onaparte@gmail.com",  DateTime.Today));
+            AddPerson(new Person("Bumbleclick", "Crumblescotch", "onaparte@gmail.com",  DateTime.Today));
             AddPerson(new Person("Bubblebath","Cuckooclock", "ubblebath@gmail.com", new DateTime(1977, 8, 18)));
             AddPerson(new Person("Bumberstump","Banglesnatch", "umberstump@gmail.com", new DateTime(1945, 9, 17)));
             AddPerson(new Person("Bettyboop","Snickersbar", "ettyboop@gmail.com", DateTime.Today));

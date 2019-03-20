@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="KMAAndrusiv02.ResultsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KMAAndrusiv02"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="235"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="235"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" Content="Name:"></Label>
+        <TextBox Grid.Row="0"  Grid.Column="1"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True" Text="{Binding PersonManagerInstance.PersonInstance.Name, Mode=OneWay}"></TextBox>
+        <Label Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" FontFamily="HelveticaNeue" Content="Mail:"></Label>
+        <TextBox Grid.Row="0"  Grid.Column="3"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"  Text="{Binding PersonManagerInstance.PersonInstance.Mail, Mode=OneWay}"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaeNeue" Content="Surname:"></Label>
+        <TextBox Grid.Row="1"  Grid.Column="1"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"  Text="{Binding PersonManagerInstance.PersonInstance.Surname, Mode=OneWay}"></TextBox>
+        <Label Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" FontFamily="HelveticaNeue" Content="Birthday:"></Label>
+        <TextBox Grid.Row="1"  Grid.Column="3"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"  Text="{Binding PersonManagerInstance.PersonInstance.Birthday, Mode=OneWay, StringFormat=dd.MM.yyyy}"></TextBox>
+
+        <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" Content="Sun sign:"></Label>
+        <TextBox Grid.Row="2"  Grid.Column="1"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True" Text="{Binding PersonManagerInstance.PersonInstance.SunSign, Mode=OneWay}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" FontFamily="HelveticaNeue" Content="Adult:"></Label>
+        <TextBox Grid.Row="2"  Grid.Column="3"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"   Text="{Binding PersonManagerInstance.PersonInstance.IsAdult, Mode=OneWay}"></TextBox>
+        <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaeNeue" Content="Chinese sign:"></Label>
+        <TextBox Grid.Row="3"  Grid.Column="1"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"  Text="{Binding PersonManagerInstance.PersonInstance.ChineseSign, Mode=OneWay}"></TextBox>
+        <Label Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" FontFamily="HelveticaNeue" Content="Is B-day:"></Label>
+        <TextBox Grid.Row="3"  Grid.Column="3"  Width="230" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontFamily="HelveticaNeue" IsReadOnly="True"   Text="{Binding PersonManagerInstance.PersonInstance.IsBirthday, Mode=OneWay}"></TextBox>
+        <Button Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="0" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="30" FontFamily="HelveticaNeue" Content="Back" Command="{Binding ReturnCommand }"></Button>
+
+    </Grid>
+</UserControl>
