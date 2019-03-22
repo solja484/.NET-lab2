@@ -14,7 +14,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="390"/>
-            <ColumnDefinition Width="390"/>
+            <ColumnDefinition Width="195"/>
+            <ColumnDefinition Width="195"/>
         </Grid.ColumnDefinitions>
 
         <DataGrid ItemsSource="{Binding Persons, Mode=OneWay}" AutoGenerateColumns="False"  Grid.Row="0"  Grid.ColumnSpan="2" Grid.Column="0">
@@ -35,8 +36,9 @@
 
         <Button Content="Save" Grid.Row="1"  Grid.Column="0" Command="{Binding SaveCommand}"></Button>
         <Button Content="Add" Grid.Row="1" Grid.Column="1" Command="{Binding AddCommand}"></Button>
+        <Button Content="Delete" Grid.Row="1" Grid.Column="2" Command="{Binding DeleteCommand}"></Button>
 
-        <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2">
+        <Grid Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
