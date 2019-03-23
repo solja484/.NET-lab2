@@ -1,6 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using KMAAndrusiv02.DataStorageTools;
+using KMAAndrusiv02.Managers;
 using KMAAndrusiv02.NavigationTools;
 
 namespace KMAAndrusiv02
@@ -11,7 +11,7 @@ namespace KMAAndrusiv02
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IContentOwner
+    public partial class MainWindow : IContentOwner
     {
         public ContentControl ContentControl => _contentControl;
 

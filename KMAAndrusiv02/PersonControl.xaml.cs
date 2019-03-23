@@ -1,5 +1,4 @@
 ﻿using KMAAndrusiv02.NavigationTools;
-using System.Windows.Controls;
 
 namespace KMAAndrusiv02
 {
@@ -9,7 +8,7 @@ namespace KMAAndrusiv02
     /// <summary>
     /// Interaction logic for AuthorizeControl.xaml
     /// </summary>
-    public partial class PersonControl : UserControl, INavigatable
+    public partial class PersonControl : INavigatable
     {
         public PersonControl()
         {
@@ -19,7 +18,7 @@ namespace KMAAndrusiv02
 
         public void TriggerPropertyChanged(string s)
         {
-            ((BaseViewModel) DataContext).OnPropertyChanged(s);
+            ((BaseViewModel)DataContext).OnPropertyChanged(s);
         }
     }
 }

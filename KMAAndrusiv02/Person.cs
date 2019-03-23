@@ -8,8 +8,8 @@ namespace KMAAndrusiv02
     internal class Person : INotifyPropertyChanged
     {
         #region Fields
-        private bool _calculated = false;
-        private string _name, _surname , _mail = "";
+        private bool _calculated;
+        private string _name, _surname, _mail;
         private string _chinese, _sun;
         private bool _isAdult;
         private DateTime _birthday = DateTime.MinValue;
@@ -219,7 +219,7 @@ namespace KMAAndrusiv02
         private static int GetAge(DateTime bday)
         {
             var age = DateTime.Today.Year - bday.Year;
-          
+
             if (age == 0) return age;
             if (DateTime.Today.Month < bday.Month || DateTime.Today.Day < bday.Day)
                 age--;

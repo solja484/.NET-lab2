@@ -13,6 +13,8 @@ namespace KMAAndrusiv02.DataStorageTools
         void AddPerson(Person person);
         void SaveChanges();
         List<Person> PersonsList { get; }
+
+        void DeletePerson(Person person);
     }
 }
 

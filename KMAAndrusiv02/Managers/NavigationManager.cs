@@ -1,7 +1,6 @@
 ﻿using KMAAndrusiv02.NavigationTools;
-using System.Windows;
 
-namespace KMAAndrusiv02
+namespace KMAAndrusiv02.Managers
 {
 
     internal class NavigationManager

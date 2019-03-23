@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KMAAndrusiv02
+namespace KMAAndrusiv02.Managers
 {
     // Singleton
     internal class PersonManager
@@ -16,7 +16,7 @@ namespace KMAAndrusiv02
                     return _instance;
                 lock (Locker)
                 {
-                    return _instance ?? (_instance = new PersonManager());
+                  return _instance ?? (_instance = new PersonManager());
                 }
             }
         }

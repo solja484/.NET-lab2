@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using KMAAndrusiv02.DataStorageTools;
 
 namespace KMAAndrusiv02.Managers
@@ -16,7 +12,7 @@ namespace KMAAndrusiv02.Managers
             try
             {
                 var file = new FileInfo(filePath);
-                if (file.CreateFolderAndCheckFileExistance())
+                if (file.CreateFolderAndCheckFileExistence())
                 {
                     file.Delete();
                 }
@@ -36,7 +32,7 @@ namespace KMAAndrusiv02.Managers
         {
             try
             {
-                if (!FileFolderHelper.CreateFolderAndCheckFileExistance(filePath))
+                if (!FileFolderHelper.CreateFolderAndCheckFileExistence(filePath))
                     throw new FileNotFoundException("File doesn't exist.");
                 var formatter = new BinaryFormatter();
                 using (var stream = new FileStream(filePath, FileMode.Open))

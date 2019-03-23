@@ -18,7 +18,7 @@
             <ColumnDefinition Width="195"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid ItemsSource="{Binding Persons, Mode=OneWay}" AutoGenerateColumns="False"  Grid.Row="0"  Grid.ColumnSpan="2" Grid.Column="0">
+        <DataGrid ItemsSource="{Binding Persons, Mode=OneWay}" AutoGenerateColumns="False"  Grid.Row="0"  Grid.ColumnSpan="3" Grid.Column="0" SelectedItem="{Binding SelectedPerson, Mode=OneWayToSource}">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="First name" Binding="{Binding Name, Mode=TwoWay}"></DataGridTextColumn>
@@ -42,7 +42,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
-                </Grid.RowDefinitions>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="95"/>
@@ -52,7 +52,7 @@
                 <ColumnDefinition Width="95"/>
                 <ColumnDefinition Width="95"/>
                 <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="HelveticaNeue" Content="First Name"></Label>
             <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="HelveticaNeue" Content="Last Name"></Label>
@@ -72,7 +72,7 @@
             <ComboBox Grid.Row="1" Grid.Column="6" ItemsSource="{Binding IsAdultList}" SelectedIndex="{Binding FilterIsAdult, Mode=TwoWay}"/>
             <ComboBox Grid.Row="1" Grid.Column="7" ItemsSource="{Binding IsBirthdayList}" SelectedIndex="{Binding FilterIsBirthday, Mode=TwoWay}"/>
 
-</Grid>
+        </Grid>
 
 
     </Grid>

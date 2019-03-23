@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Dynamic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using KMAAndrusiv02.Managers;
 using KMAAndrusiv02.NavigationTools;
 
 namespace KMAAndrusiv02
 {
-    class PersonListViewModel:BaseViewModel
+    class PersonListViewModel : BaseViewModel
     {
 
         private ObservableCollection<Person> _persons;
@@ -28,6 +25,8 @@ namespace KMAAndrusiv02
                 OnPropertyChanged();
             }
         }
+
+        private Person _selectedPerson;
 
         internal PersonListViewModel()
         {
@@ -58,15 +57,32 @@ namespace KMAAndrusiv02
             }
         }
 
+        private RelayCommand<object> _deleteCommand;
+
+        public RelayCommand<object> DeleteCommand
+        {
+            get
+            {
+                return _deleteCommand ?? (_deleteCommand = new RelayCommand<object>(
+                           DeleteImplementation, (o) => SelectedPerson != null));
+            }
+        }
+
+        private void DeleteImplementation(object obj)
+        {
+            StationManager.DataStorage.DeletePerson(SelectedPerson);
+            OnPropertyChanged($"Persons");
+        }
+
         private void SaveImplementation(object obj)
         {
             StationManager.DataStorage.SaveChanges();
         }
 
-        private int _filterSunSign = 0, _filterChineseSign=0, _filterIsAdult=0, _filterIsBirthday=0;
+        private int _filterSunSign, _filterChineseSign, _filterIsAdult, _filterIsBirthday;
         public int FilterSunSign
         {
-            get { return _filterSunSign;}
+            get => _filterSunSign;
             set
             {
                 _filterSunSign = value;
@@ -76,7 +92,7 @@ namespace KMAAndrusiv02
 
         public int FilterChineseSign
         {
-            get { return _filterChineseSign; }
+            get => _filterChineseSign;
             set
             {
                 _filterChineseSign = value;
@@ -85,7 +101,7 @@ namespace KMAAndrusiv02
         }
         public int FilterIsAdult
         {
-            get { return _filterIsAdult; }
+            get => _filterIsAdult;
             set
             {
                 _filterIsAdult = value;
@@ -94,7 +110,7 @@ namespace KMAAndrusiv02
         }
         public int FilterIsBirthday
         {
-            get { return _filterIsBirthday; }
+            get => _filterIsBirthday;
             set
             {
                 _filterIsBirthday = value;
@@ -106,7 +122,7 @@ namespace KMAAndrusiv02
 
         public string FilterName
         {
-            get { return _filterName; }
+            get => _filterName;
             set
             {
                 _filterName = value;
@@ -115,7 +131,7 @@ namespace KMAAndrusiv02
         }
         public string FilterSurname
         {
-            get { return _filterSurname; }
+            get => _filterSurname;
             set
             {
                 _filterSurname = value;
@@ -124,7 +140,7 @@ namespace KMAAndrusiv02
         }
         public string FilterMail
         {
-            get { return _filterMail; }
+            get => _filterMail;
             set
             {
                 _filterMail = value;
@@ -134,36 +150,41 @@ namespace KMAAndrusiv02
         private DateTime _filterDate = DateTime.MinValue;
         public DateTime FilterDate
         {
-            get { return _filterDate; }
+            get => _filterDate;
             set
             {
                 _filterDate = value;
                 Persons = new ObservableCollection<Person>(Query);
             }
         }
-        public List<string> SunSignsList { get; } = new List<string>(new string[] { "All", "Capricorn","Aquarius","Pisces","Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius"});
+        public List<string> SunSignsList { get; } = new List<string>(new[] { "All", "Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius" });
 
-        public List<string> ChineseSignsList { get; } = new List<string>(new string[] { "All","Dragon", "Tiger", "Snake", "Chicken", "Pig", "Horse", "Dog", "Rat", "Bull", "Monkey", "Rabbit", "Goat" });
+        public List<string> ChineseSignsList { get; } = new List<string>(new[] { "All", "Dragon", "Tiger", "Snake", "Chicken", "Pig", "Horse", "Dog", "Rat", "Bull", "Monkey", "Rabbit", "Goat" });
 
-        public List<string> IsBirthdayList { get; } = new List<string>(new string[] {"All", "Today","Not today" });
+        public List<string> IsBirthdayList { get; } = new List<string>(new[] { "All", "Today", "Not today" });
 
-        public List<string> IsAdultList { get; } = new List<string>(new string[] {"All","Adult","Child" });
+        public List<string> IsAdultList { get; } = new List<string>(new[] { "All", "Adult", "Child" });
 
-
-        public IEnumerable<Person> Query
+        public Person SelectedPerson
         {
-            get
+            get => _selectedPerson;
+            set
             {
-                return (from p in StationManager.DataStorage.PersonsList
-                    where p.Name.StartsWith(FilterName) 
-                          && p.Surname.StartsWith(FilterSurname) 
-                          && p.Mail.StartsWith(FilterMail) 
-                          && (FilterDate.Equals(DateTime.MinValue) || p.Birthday.Equals(FilterDate)) 
-                          && (FilterChineseSign == 0 || p.ChineseSign.Equals(ChineseSignsList[FilterChineseSign]))
-                          && (FilterSunSign == 0 || p.SunSign.Equals(SunSignsList[FilterSunSign]))
-                          && (FilterIsAdult == 0 || ((FilterIsAdult == 1) && p.IsAdult))
-                          && (FilterIsBirthday == 0 || ((FilterIsBirthday == 1) && p.IsBirthday)) select p);
+                _selectedPerson = value;
+                OnPropertyChanged();
             }
         }
+
+        public IEnumerable<Person> Query =>
+            from p in StationManager.DataStorage.PersonsList
+            where p.Name.StartsWith(FilterName)
+                  && p.Surname.StartsWith(FilterSurname)
+                  && p.Mail.StartsWith(FilterMail)
+                  && (FilterDate.Equals(DateTime.MinValue) || p.Birthday.Equals(FilterDate))
+                  && (FilterChineseSign == 0 || p.ChineseSign.Equals(ChineseSignsList[FilterChineseSign]))
+                  && (FilterSunSign == 0 || p.SunSign.Equals(SunSignsList[FilterSunSign]))
+                  && (FilterIsAdult == 0 || ((FilterIsAdult == 1) && p.IsAdult))
+                  && (FilterIsBirthday == 0 || ((FilterIsBirthday == 1) && p.IsBirthday))
+            select p;
     }
 }

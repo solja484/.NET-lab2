@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿
 
-namespace KMAAndrusiv02
+using System.Windows;
+
+namespace KMAAndrusiv02.Managers
 {
     internal class LoaderManager
     {

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KMAAndrusiv02.DataStorageTools
 {
@@ -18,15 +14,15 @@ namespace KMAAndrusiv02.DataStorageTools
         internal static readonly string StorageFilePath =
             Path.Combine(AppFolderPath, "PersonStorage.cskma");
 
-        internal static bool CreateFolderAndCheckFileExistance(string filePath)
+        internal static bool CreateFolderAndCheckFileExistence(string filePath)
         {
             var file = new FileInfo(filePath);
-            return file.CreateFolderAndCheckFileExistance();
+            return file.CreateFolderAndCheckFileExistence();
         }
 
-        internal static bool CreateFolderAndCheckFileExistance(this FileInfo file)
+        internal static bool CreateFolderAndCheckFileExistence(this FileInfo file)
         {
-            if (!file.Directory.Exists)
+            if (file.Directory != null && !file.Directory.Exists)
             {
                 file.Directory.Create();
             }
